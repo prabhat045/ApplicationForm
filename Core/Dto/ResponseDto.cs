@@ -6,6 +6,6 @@ namespace ApplicationForm.Core.Dto
     {
         public string programApplicationId { get; set; }
 
-        public List<ResponseAnswers> Answers { get; set; }
+        public List<ResponseAnswerDto> Answers { get; set; }
     }
 }

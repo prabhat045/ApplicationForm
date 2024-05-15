@@ -8,9 +8,11 @@ namespace ApplicationForm.Manager
 
         private readonly Container _container;
 
-        public ProgramApplicationManager(CosmosClient cosmosClient)
+        public ProgramApplicationManager(CosmosClient cosmosClient,IConfiguration configuration)
         {
-            _container = cosmosClient.GetContainer("ApplicatioForm", "Program");
+            var databaseName = configuration["CosmosDbSettings:DatabaseName"];
+            var containerName = configuration["CosmosDbSettings:ApplicationCreationContainer"];
+            _container = cosmosClient.GetContainer(databaseName, containerName);
         }
 
         public async Task<string> CreateProgram(ProgramApplication application)

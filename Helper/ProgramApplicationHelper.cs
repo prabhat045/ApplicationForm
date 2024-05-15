@@ -37,7 +37,7 @@ namespace ApplicationForm.Helper
                     Label = q.Label,
                     Type = q.Type,
                     Options = q.Options,
-                    Answer = []
+                    
 
                 }).ToList(),
             };
@@ -68,7 +68,6 @@ namespace ApplicationForm.Helper
                     Label = q.Label,
                     Type = q.Type,
                     Options = q.Options,
-                    Answer = []
 
                 }).ToList(),
             };
@@ -108,6 +107,9 @@ namespace ApplicationForm.Helper
             };
             return programApplicationDto;
         }
+
+
+
         
     }
 }

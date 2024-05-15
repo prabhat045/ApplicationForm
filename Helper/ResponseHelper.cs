@@ -4,6 +4,7 @@ using ApplicationForm.Manager;
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
 
 namespace ApplicationForm.Helper
 {
@@ -38,9 +39,13 @@ namespace ApplicationForm.Helper
                 Nationality = responseDto.Nationality,
                 CurrentResidence = responseDto.CurrentResidence,
                 IdNumber = responseDto.IdNumber,
-                DateOfBirth = DateOnly.Parse(responseDto.DateOfBirth),
+                DateOfBirth = responseDto.DateOfBirth != null ? DateOnly.Parse(responseDto.DateOfBirth) : null,
                 Gender = responseDto.Gender,
-                Answers = responseDto.Answers,
+                Answers = responseDto.Answers.Select(a => new ResponseAnswers
+                {
+                     Label = a.Label,
+                     Answer = a.Answer
+                }).ToList()
             };
 
             await _responseManager.SubmitApplication(response).ConfigureAwait(false);

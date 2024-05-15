@@ -7,8 +7,10 @@ namespace ApplicationForm.Manager
     {
 
         private readonly Container _container;
-        public ResponseManager(CosmosClient cosmosClient) {
-            _container = cosmosClient.GetContainer("ApplicatioForm", "Response");
+        public ResponseManager(CosmosClient cosmosClient, IConfiguration configuration) {
+            var databaseName = configuration["CosmosDbSettings:DatabaseName"];
+            var containerName = configuration["CosmosDbSettings:ResponseContainer"];
+            _container = cosmosClient.GetContainer(databaseName, containerName);
         }
 
         public async Task SubmitApplication(Response response)
